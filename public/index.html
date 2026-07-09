@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>KGM ML 검사 Agent</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="workspace">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">Visual Quality Inspection</p>
+            <h1>KGM ML 검사 Agent</h1>
+          </div>
+          <span class="status-pill" id="statusPill">대기</span>
+        </header>
+
+        <div class="main-grid">
+          <section class="panel input-panel">
+            <form id="inspectionForm">
+              <label class="upload-box" for="imageInput">
+                <input id="imageInput" name="image" type="file" accept="image/*" />
+                <span class="upload-icon">+</span>
+                <strong>제품 사진 또는 검사 이미지 업로드</strong>
+                <small>JPG, PNG, WebP 이미지를 선택하세요.</small>
+              </label>
+
+              <div class="preview-frame" id="previewFrame">
+                <img id="previewImage" alt="업로드 이미지 미리보기" />
+                <span id="emptyPreview">이미지 미리보기</span>
+              </div>
+
+              <div class="field-grid">
+                <label>
+                  제품/공정 정보
+                  <input id="productName" type="text" placeholder="예: 도어 트림 사출품" />
+                </label>
+                <label>
+                  검사 목적
+                  <input id="inspectionGoal" type="text" placeholder="예: 외관 스크래치 및 오염 확인" />
+                </label>
+              </div>
+
+              <label>
+                추가 메모
+                <textarea id="notes" rows="4" placeholder="검사 조건, 촬영 위치, 이전 이력 등을 입력하세요."></textarea>
+              </label>
+
+              <button class="primary-button" type="submit" id="submitButton">검사 분석 실행</button>
+            </form>
+          </section>
+
+          <section class="results" aria-live="polite">
+            <div class="verdict-band" id="verdictBand">
+              <p>판정</p>
+              <strong id="verdictText">-</strong>
+              <span id="confidenceText">신뢰도 -</span>
+            </div>
+
+            <article class="panel result-card">
+              <h2>요약</h2>
+              <p id="summaryText">이미지를 업로드하고 분석을 실행하면 결과가 표시됩니다.</p>
+            </article>
+
+            <article class="panel result-card">
+              <h2>불량 의심 부위</h2>
+              <div id="suspectedAreas" class="list-block empty">결과 없음</div>
+            </article>
+
+            <article class="panel result-card">
+              <h2>가능한 불량 유형</h2>
+              <div id="defectTypes" class="list-block empty">결과 없음</div>
+            </article>
+
+            <article class="panel result-card">
+              <h2>검사자 체크리스트</h2>
+              <ul id="checklist" class="checklist"></ul>
+            </article>
+
+            <article class="panel result-card">
+              <div class="card-title-row">
+                <h2>기록용 코멘트</h2>
+                <button type="button" class="ghost-button" id="copyButton">복사</button>
+              </div>
+              <p id="recordComment" class="record-comment">-</p>
+            </article>
+          </section>
+        </div>
+      </section>
+    </main>
+    <script src="/app.js" type="module"></script>
+  </body>
+</html>
